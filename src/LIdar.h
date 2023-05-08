@@ -3,7 +3,9 @@
 
 #include "Adafruit_VL53L0X.h"
 
+
 void lidarSetup();
 void lidarDistance();
+void getDistance();
 
 #endif
