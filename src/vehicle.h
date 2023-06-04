@@ -3,7 +3,7 @@
 
 // Motor A
 #define motor1Pin1  13
-#define motor1Pin2  12 
+#define motor1Pin2  12
 #define enable1Pin  14 
 
 // Motor B

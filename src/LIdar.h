@@ -2,10 +2,13 @@
 #define lidar_H
 
 #include "Adafruit_VL53L0X.h"
+#include<ESP32Servo.h>
+
+
 
 
 void lidarSetup();
-void lidarDistance();
-void getDistance();
+int lidarDistance();
+void obstacleAvoidance();
 
 #endif

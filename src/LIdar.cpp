@@ -1,7 +1,8 @@
 #include "LIdar.h"
 #include <vehicle.h>
+#include <servomtr.h>
 
-
+ 
 int distance ;
 
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
@@ -20,13 +21,12 @@ void lidarSetup()
     Serial.println(F("Failed to boot VL53L0X"));
     while(1);
   }
-  // power 
-  Serial.println(F("VL53L0X API Simple Ranging example\n\n")); 
+  Serial.println("success to boot lidar");
 }
 
 VL53L0X_RangingMeasurementData_t measure;
 
-void lidarDistance() 
+int lidarDistance() 
 {
  
   Serial.print("Reading a measurement... ");
@@ -41,16 +41,49 @@ void lidarDistance()
   }
     
   delay(100);
+  return distance ;
   
 }
- void getDistance()
+ void obstacleAvoidance()
  {
+  int distance_R;
+  int distance_L;
+
   Serial.print("got :"); Serial.println(distance);
 
-  if(distance == 0)
+  if (distance <= 400)
   {
-    Serial.println("move forward");
+    Stop();
+    delay(300);
+
+    moveBwd();
+    delay(400);
+
+    Stop();
+    delay(300);
+
+    distance_R = lookRight();
+    delay (300);
+
+    distance_L = lookLeft();
+    delay (300);
+
+    if(distance >= distance_L)
+    {
+      moveRight();
+      Stop();
+    }
+    else
+    {
+      moveLeft();
+      Stop();
+    }
+  }
+  else
+  {
     moveFwd();
   }
-       
+
+  distance = lidarDistance();
+    
  }

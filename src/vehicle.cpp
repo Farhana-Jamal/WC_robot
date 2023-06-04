@@ -18,7 +18,13 @@ void motorSetup()
 
   // testing
   Serial.print("Testing DC Motor..."); 
+
+analogWrite(enable1Pin,100);
+analogWrite(enable2Pin , 100);
+
 }
+
+  
 
 void moveFwd()
 {
@@ -26,13 +32,10 @@ void moveFwd()
   Serial.println("Moving Forward");
   digitalWrite(motor1Pin1, LOW);
   digitalWrite(motor1Pin2, HIGH);
-  analogWrite(enable1Pin,200);
-
   digitalWrite(motor2Pin1, LOW);
   digitalWrite(motor2Pin2, HIGH);
-  analogWrite(enable2Pin , 200); 
+   
  
-
 }
 
 
@@ -63,20 +66,38 @@ void moveFwd()
 
  void moveLeft()
 {
-    Serial.println("Motor left");
-    digitalWrite(motor1Pin1 , LOW);
-    digitalWrite(motor1Pin2 , LOW);
-    digitalWrite(motor2Pin1 , HIGH);
-    digitalWrite(motor2Pin2 , LOW);
+  Serial.println("Motor left");
+  digitalWrite(motor1Pin1 , LOW);
+  digitalWrite(motor1Pin2 , LOW);
+  digitalWrite(motor2Pin1 , HIGH);
+  digitalWrite(motor2Pin2 , LOW);
+
+  delay(2000);
+
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, HIGH);
+   
+
+
 
 }
 
 void moveRight()
 {
-    Serial.println("Motor right");
-    digitalWrite(motor1Pin1 , LOW);
-    digitalWrite(motor1Pin2 , HIGH);
-    digitalWrite(motor2Pin1 , LOW);
-    digitalWrite(motor2Pin2 , LOW);
+  Serial.println("Motor right");
+  digitalWrite(motor1Pin1 , LOW);
+  digitalWrite(motor1Pin2 , HIGH);
+  digitalWrite(motor2Pin1 , LOW);
+  digitalWrite(motor2Pin2 , LOW);
+
+  delay(2000);
+
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, HIGH);
+   
 
 }
