@@ -1,6 +1,35 @@
 #include "LIdar.h"
+#include <vehicle.h>
+#include <servomtr.h>
+#include <beacon.h>
+
+bool rotate = false;
+
+ 
+int distance ;
 
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
+
+VL53L0X_RangingMeasurementData_t measure;
+
+int lidarDistance() 
+{
+ 
+  Serial.print("Reading a measurement... ");
+  lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
+
+  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
+    
+    distance = measure.RangeMilliMeter;
+    Serial.print("Distance (mm): "); Serial.println(distance);
+  } else {
+    distance = 0;
+  }
+    
+  delay(100);
+  return distance ;
+  
+}
 
 void lidarSetup() 
 {
@@ -16,23 +45,70 @@ void lidarSetup()
     Serial.println(F("Failed to boot VL53L0X"));
     while(1);
   }
-  // power 
-  Serial.println(F("VL53L0X API Simple Ranging example\n\n")); 
+  Serial.println("success to boot lidar");
+
+  distance = lidarDistance();
 }
 
 
-void lidarDistance() 
-{
-  VL53L0X_RangingMeasurementData_t measure;
+ void obstacleAvoidance()
+ {
     
-  Serial.print("Reading a measurement... ");
-  lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
+    if(!rotate)
+    {  
+      Serial.println("rotating");
+      robotMovement(1,0,0,1);
+      dataS();
+      delay(20000);
 
-  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
-    Serial.print("Distance (mm): "); Serial.println(measure.RangeMilliMeter);
-  } else {
-    Serial.println(" out of range / no obstacles");
+      rotate = true;
+  
+    }
+
+  int distance_R;
+  int distance_L;
+
+  Serial.print("got :"); Serial.println(distance);
+
+  if( distance == 0 || distance >400)
+  {
+    robotMovement(0,1,0,1);   //forward
   }
+  else
+  {
+    robotMovement(0,0,0,0);   //stop
+    delay(300);
+
+    robotMovement(1,0,1,0);   //backward
+    delay(400);
+
+    robotMovement(0,0,0,0);
+    delay(300);
+
+    distance_R = lookRight();
+    delay (300);
+
+    distance_L = lookLeft();
+    delay (300);
+
+    if(distance >= distance_L)
+    {
+      robotMovement(0,1,1,0);      //right
+      delay(500);
+      robotMovement(0,1,0,1);      //forward
+      robotMovement(0,0,0,0);      //stop
+    }
+    else
+    {
+      robotMovement(1,0,0,1);   //left
+      delay(500);
+      robotMovement(0,1,0,1);      //forward
+      robotMovement(0,0,0,0);      //stop
+
+    }
+  }
+
+  distance = lidarDistance();
+  
     
-  delay(100);
-}
+ }
