@@ -11,18 +11,15 @@ void setup()
   motorSetup();
   beaconSetup();
 
-
-  
-  
 }
 
+
+
 void loop()
-{  dataS();
+{ 
+ 
+  
   obstacleAvoidance();
   // moveFwd();
-  
-
-
-  
-  
+ 
 }

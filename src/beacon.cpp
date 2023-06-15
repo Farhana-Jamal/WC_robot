@@ -100,26 +100,7 @@ void beaconSetup() {
 }
   
 
-// void loop() {
+
 
  
    
-//   dataS();
- 
- 
-  // if (btScanSync) 
-  // {
-  //   Serial.println("Starting discover...");
-  //   BTScanResults *pResults = SerialBT.discover(BT_DISCOVER_TIME);
-  //   if (pResults)
-  //   {
-  //    pResults->dump(&Serial);
-   
-  //   }
-  //   else
-    
-  //     Serial.println("Error on BT Scan, no result!");
-  // }
-
-  
-// }

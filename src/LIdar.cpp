@@ -3,7 +3,8 @@
 #include <servomtr.h>
 #include <beacon.h>
 
-bool rotate = false;
+
+
 
  
 int distance ;
@@ -15,7 +16,7 @@ VL53L0X_RangingMeasurementData_t measure;
 int lidarDistance() 
 {
  
-  Serial.print("Reading a measurement... ");
+  Serial.println("Reading a measurement... ");
   lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
 
   if (measure.RangeStatus != 4) {  // phase failures have incorrect data
@@ -51,19 +52,11 @@ void lidarSetup()
 }
 
 
+
+
  void obstacleAvoidance()
  {
-    
-    if(!rotate)
-    {  
-      Serial.println("rotating");
-      robotMovement(1,0,0,1);
-      dataS();
-      delay(20000);
-
-      rotate = true;
-  
-    }
+   rotatingOne(); 
 
   int distance_R;
   int distance_L;
@@ -108,7 +101,7 @@ void lidarSetup()
     }
   }
 
+  dataS();
   distance = lidarDistance();
-  
-    
+   
  }
