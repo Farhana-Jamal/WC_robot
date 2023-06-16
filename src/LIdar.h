@@ -6,7 +6,7 @@
 
 
 
-
+void rotatingOne();
 void lidarSetup();
 int lidarDistance();
 void obstacleAvoidance();

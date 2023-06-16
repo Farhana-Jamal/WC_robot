@@ -2,11 +2,7 @@
 #include <Arduino.h>
 #include <beacon.h>
 
-bool rotate = false;
 
-unsigned long prvsTime = 0;
-unsigned long rotationDuration = 30000;
-unsigned long currentTime;
 
 
 void motorSetup()
@@ -32,29 +28,7 @@ analogWrite(enable2Pin , 80);
 
 }
 
-void rotatingOne()
-{
-  currentTime = millis();
-  if(!rotate)
-  {  
-      Serial.println("rotating");
-      robotMovement(1,0,0,1);
-      rotate = true;
-      prvsTime = currentTime;
-  }
 
-  if(rotate && currentTime-prvsTime < rotationDuration)
-  {
-    Serial.println("rotating with ");
-    robotMovement(1,0,0,1);
-    dataS();
-  }
-  else
-  {
-    rotate = true;
-  }
-  
-}
 
 void robotMovement(bool INA1,bool INA2 , bool INA3 , bool INA4)
 {

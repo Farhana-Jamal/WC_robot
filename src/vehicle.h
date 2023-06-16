@@ -14,7 +14,7 @@
 
 
 void motorSetup();
-void rotatingOne();
+
 void robotMovement(bool INA1,bool INA2 , bool INA3 , bool INA4);
 // void moveFwd();
 // void moveBwd();

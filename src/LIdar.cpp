@@ -3,7 +3,11 @@
 #include <servomtr.h>
 #include <beacon.h>
 
+unsigned long prvsTime = 0;
+unsigned long rotationDuration = 30000;
+unsigned long currentTime;
 
+bool rotate = false;
 
 
  
@@ -51,13 +55,38 @@ void lidarSetup()
   distance = lidarDistance();
 }
 
+void rotatingOne()
+{
+  currentTime = millis();
+  if(rotate = false)
+  {  
+      Serial.println("rotating");
+      robotMovement(1,0,0,1);
+      
+      prvsTime = currentTime;
+  }
 
+  if((currentTime-prvsTime) < rotationDuration)
+  {
+    Serial.println("rotating with ");
+    robotMovement(1,0,0,1);
+    dataS();
+  }
+  else
+  {
+    rotate = true;
+    Serial.println("rotation stopped");
+  }
+  
+}
 
 
  void obstacleAvoidance()
- {
+ { 
    rotatingOne(); 
-
+ 
+if(rotate == true)
+{
   int distance_R;
   int distance_L;
 
@@ -104,4 +133,5 @@ void lidarSetup()
   dataS();
   distance = lidarDistance();
    
+ }
  }
