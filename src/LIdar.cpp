@@ -3,7 +3,7 @@
 #include <servomtr.h>
 #include <beacon.h>
 
-unsigned long prvsTime = 0;
+
 unsigned long rotationDuration = 30000;
 unsigned long currentTime;
 
@@ -58,16 +58,26 @@ void lidarSetup()
 void rotatingOne()
 {
   currentTime = millis();
-  if(rotate = false)
-  {  
-      Serial.println("rotating");
-      robotMovement(1,0,0,1);
+  Serial.print("ctime1     "); Serial.println(currentTime);
+  // if(rotate = false)
+  // {  
+  //     Serial.println("rotating");
+  //     robotMovement(1,0,0,1);
       
-      prvsTime = currentTime;
-  }
+  //     Serial.print("ctime2     "); Serial.println(currentTime);
 
-  if((currentTime-prvsTime) < rotationDuration)
+  //     prvsTime = currentTime;
+
+  //     Serial.print("ctime3     "); Serial.println(currentTime);
+  //     Serial.print("ptime1     "); Serial.println(prvsTime);
+
+  // }
+
+  if(currentTime < rotationDuration)
   {
+     Serial.print("ctime2     "); Serial.println(currentTime);
+      // Serial.print("ptime2     "); Serial.println(prvsTime);
+    // Serial.print("ctime - ptime    "); Serial.println(currentTime);
     Serial.println("rotating with ");
     robotMovement(1,0,0,1);
     dataS();
