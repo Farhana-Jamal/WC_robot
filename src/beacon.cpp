@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <beacon.h>
 #include <BluetoothSerial.h>
+#include <WiFi.h>
 #include <LIdar.h>
 
 
@@ -68,7 +69,7 @@ void btAdvertisedDeviceFound(BTAdvertisedDevice* pDevice) {
 
     
 }
- void dataS()
+ void bleDataS()
 {
      if (btScanAsync) {
     Serial.print("Starting discoverAsync...");
@@ -87,16 +88,53 @@ void btAdvertisedDeviceFound(BTAdvertisedDevice* pDevice) {
 
 
 
-void beaconSetup() {
+void bleBeaconSetup() 
+{
   
   Serial.begin(115200);
   SerialBT.begin("ESP32test"); //Bluetooth device name
   Serial.println("The device started, now you can pair it with bluetooth!");
 
- 
-  
-  
+}
 
+void wifiBeaconSetup()
+{
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect();
+  delay(100);
+
+  Serial.println(" wifi Setup done");
+
+}
+
+void wifiScanDatas()
+{
+  Serial.println("scan start");
+
+  // WiFi.scanNetworks will return the number of networks found
+  int n = WiFi.scanNetworks();
+  Serial.println("scan done");
+  if (n == 0) {
+      Serial.println("no networks found");
+  } else {
+    Serial.print(n);
+    Serial.println(" networks found");
+    for (int i = 0; i < n; ++i) {
+      // Print SSID and RSSI for each network found
+      Serial.print(i + 1);
+      Serial.print(": ");
+      Serial.print(WiFi.SSID());
+      Serial.print("    RSSI :");
+      Serial.println(WiFi.RSSI());
+     
+      // Serial.println((WiFi.encryptionType(i) == WIFI_AUTH_OPEN)?" ":"*");
+    //   delay(10);
+    }
+  }
+  Serial.println("");
+
+  // Wait a bit before scanning again
+  delay(2000);
 }
   
 

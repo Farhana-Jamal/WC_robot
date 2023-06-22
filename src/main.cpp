@@ -9,7 +9,8 @@ void setup()
   servoSetup();
   lidarSetup();
   motorSetup();
-  beaconSetup();
+  bleBeaconSetup();
+  wifiBeaconSetup();
 
 }
 

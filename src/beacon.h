@@ -4,8 +4,10 @@
 
 
  void rssiRead(int rssiRaw);
- void dataS();
- void beaconSetup();
+ void bleDataS();
+ void bleBeaconSetup();
+ void wifiBeaconSetup();
+ void wifiScanDatas();
 
 
 #endif

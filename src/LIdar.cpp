@@ -80,7 +80,8 @@ void rotatingOne()
     // Serial.print("ctime - ptime    "); Serial.println(currentTime);
     Serial.println("rotating with ");
     robotMovement(1,0,0,1);
-    dataS();
+    bleDataS();
+    wifiScanDatas();
   }
   else
   {
@@ -140,7 +141,8 @@ if(rotate == true)
     }
   }
 
-  dataS();
+  bleDataS();
+  wifiScanDatas();
   distance = lidarDistance();
    
  }
