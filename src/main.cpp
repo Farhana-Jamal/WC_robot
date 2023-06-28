@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include <LIdar.h>
-#include <vehicle.h>
-#include <servomtr.h>
-#include <beacon.h>
+#include "lidar.h"
+#include "vehicle.h"
+#include "servomtr.h"
+#include "beacon.h"
 
 void setup() 
 {
@@ -10,7 +10,7 @@ void setup()
   lidarSetup();
   motorSetup();
   bleBeaconSetup();
-  wifiBeaconSetup();
+
 
 }
 

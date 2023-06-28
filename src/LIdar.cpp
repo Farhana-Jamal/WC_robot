@@ -1,8 +1,4 @@
-#include "LIdar.h"
-#include <vehicle.h>
-#include <servomtr.h>
-#include <beacon.h>
-
+#include "lidar.h"
 
 unsigned long rotationDuration = 30000;
 unsigned long currentTime;
@@ -88,7 +84,7 @@ void rotatingOne()
     Serial.println("rotating with ");
     robotMovement(1,0,0,1);
     bleDataS();
-    wifiScanDatas();
+   
   }
   else
   {
@@ -149,7 +145,7 @@ if(rotate == true)
   }
 
   bleDataS();
-  wifiScanDatas();
+
   distance = lidarDistance();
    
  }

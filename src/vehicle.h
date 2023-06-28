@@ -1,6 +1,9 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
+#include <Arduino.h>
+
+
 // Motor A
 #define motor1Pin1  25
 #define motor1Pin2  26

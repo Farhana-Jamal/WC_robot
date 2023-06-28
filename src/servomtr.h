@@ -1,6 +1,7 @@
-#ifndef SERVO_H
-#define SERVO_H
+#ifndef SERVOMTR_H
+#define SERVOMTR_H
 
+#include "lidar.h"
 
 #define servoPin  15
 

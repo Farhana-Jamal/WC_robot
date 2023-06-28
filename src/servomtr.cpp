@@ -1,5 +1,4 @@
-#include <servomtr.h>
-#include <LIdar.h>
+#include "servomtr.h"
 
 
 void servoRotate(int pulseWidth)

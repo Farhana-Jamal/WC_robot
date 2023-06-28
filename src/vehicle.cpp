@@ -1,6 +1,4 @@
 #include <vehicle.h>
-#include <Arduino.h>
-#include <beacon.h>
 
 
 

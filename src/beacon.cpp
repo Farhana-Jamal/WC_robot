@@ -1,9 +1,4 @@
-#include <Arduino.h>
-#include <beacon.h>
-#include <BluetoothSerial.h>
-#include <WiFi.h>
-#include <LIdar.h>
-
+#include "beacon.h"
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
@@ -23,6 +18,8 @@ static bool btScanAsync = true;
 static bool btScanSync = true;
 
 int rssiData = -100 ;
+
+
 void rssiRead(int rssiRaw)
 {
   
@@ -96,47 +93,6 @@ void bleBeaconSetup()
   Serial.println("The device started, now you can pair it with bluetooth!");
 
 }
-
-void wifiBeaconSetup()
-{
-  WiFi.mode(WIFI_STA);
-  WiFi.disconnect();
-  delay(100);
-
-  Serial.println(" wifi Setup done");
-
-}
-
-void wifiScanDatas()
-{
-  Serial.println("scan start");
-
-  // WiFi.scanNetworks will return the number of networks found
-  int n = WiFi.scanNetworks();
-  Serial.println("scan done");
-  if (n == 0) {
-      Serial.println("no networks found");
-  } else {
-    Serial.print(n);
-    Serial.println(" networks found");
-    for (int i = 0; i < n; ++i) {
-      // Print SSID and RSSI for each network found
-      Serial.print(i + 1);
-      Serial.print(": ");
-      Serial.print(WiFi.SSID());
-      Serial.print("    RSSI :");
-      Serial.println(WiFi.RSSI());
-     
-      // Serial.println((WiFi.encryptionType(i) == WIFI_AUTH_OPEN)?" ":"*");
-    //   delay(10);
-    }
-  }
-  Serial.println("");
-
-  // Wait a bit before scanning again
-  delay(2000);
-}
-  
 
 
 
