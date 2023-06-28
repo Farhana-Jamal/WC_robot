@@ -8,28 +8,18 @@ unsigned long rotationDuration = 30000;
 unsigned long currentTime;
 
 bool rotate = false;
-
-
  
 int distance ;
 
-Adafruit_VL53L0X lox = Adafruit_VL53L0X();
-
-VL53L0X_RangingMeasurementData_t measure;
+VL53L0X lidar;
 
 int lidarDistance() 
 {
  
   Serial.println("Reading a measurement... ");
-  lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
-
-  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
-    
-    distance = measure.RangeMilliMeter;
-    Serial.print("Distance (mm): "); Serial.println(distance);
-  } else {
-    distance = 0;
-  }
+  
+  distance = lidar.readRangeSingleMillimeters();
+  Serial.print("Distance : "); 
     
   delay(100);
   return distance ;
@@ -40,17 +30,34 @@ void lidarSetup()
 {
   Serial.begin(115200);
 
-  // wait until serial port opens for native USB devices
-  while (! Serial) {
+  Wire.begin();
+
+  while (! Serial) {                                          // wait until serial port opens for native USB devices
     delay(1);
   }
   
   Serial.println("Adafruit VL53L0X test");
-  if (!lox.begin()) {
+  if (!lidar.init()) {
     Serial.println(F("Failed to boot VL53L0X"));
     while(1);
   }
   Serial.println("success to boot lidar");
+
+  #if defined LONG_RANGE
+  // lower the return signal rate limit (default is 0.25 MCPS)
+  sensor.setSignalRateLimit(0.1);
+  // increase laser pulse periods (defaults are 14 and 10 PCLKs)
+  sensor.setVcselPulsePeriod(VL53L0X::VcselPeriodPreRange, 18);
+  sensor.setVcselPulsePeriod(VL53L0X::VcselPeriodFinalRange, 14);
+  #endif
+
+   #if defined HIGH_SPEED
+  // reduce timing budget to 20 ms (default is about 33 ms)
+  sensor.setMeasurementTimingBudget(20000);
+   #elif defined HIGH_ACCURACY
+  // increase timing budget to 200 ms
+  sensor.setMeasurementTimingBudget(200000);
+  #endif
 
   distance = lidarDistance();
 }
@@ -103,7 +110,7 @@ if(rotate == true)
 
   Serial.print("got :"); Serial.println(distance);
 
-  if( distance == 0 || distance >400)
+  if(distance >400)
   {
     robotMovement(0,1,0,1);   //forward
   }
