@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <BluetoothSerial.h>
-
+#include "compass.h"
 
 
  void rssiRead(int rssiRaw);

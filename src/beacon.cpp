@@ -26,13 +26,11 @@ void rssiRead(int rssiRaw)
     Serial.println(rssiRaw);
     Serial.println(rssiData);
     
-
-   
-   
     if(rssiRaw >= rssiData)
     {
         Serial.print("greater rssiraw");  Serial.println(rssiRaw);
         rssiData = rssiRaw; 
+        rotate_CompassDirection();
           
     }
     else{
@@ -40,9 +38,6 @@ void rssiRead(int rssiRaw)
     }
    
 }
-
-
-
 
 void btAdvertisedDeviceFound(BTAdvertisedDevice* pDevice) {
 	Serial.printf("Found a device asynchronously: %s\n", pDevice->toString().c_str());

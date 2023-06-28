@@ -3,6 +3,7 @@
 #include "vehicle.h"
 #include "servomtr.h"
 #include "beacon.h"
+#include "compass.h"
 
 void setup() 
 {
@@ -10,6 +11,7 @@ void setup()
   lidarSetup();
   motorSetup();
   bleBeaconSetup();
+  compassSetup();
 
 
 }

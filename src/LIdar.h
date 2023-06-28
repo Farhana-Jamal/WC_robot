@@ -6,6 +6,7 @@
 #include "vehicle.h"
 #include "servomtr.h"
 #include "beacon.h"
+#include "compass.h"
 
 
 void rotatingOne();

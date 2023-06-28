@@ -62,34 +62,25 @@ void rotatingOne()
 {
   currentTime = millis();
   Serial.print("ctime1     "); Serial.println(currentTime);
-  // if(rotate = false)
-  // {  
-  //     Serial.println("rotating");
-  //     robotMovement(1,0,0,1);
-      
-  //     Serial.print("ctime2     "); Serial.println(currentTime);
-
-  //     prvsTime = currentTime;
-
-  //     Serial.print("ctime3     "); Serial.println(currentTime);
-  //     Serial.print("ptime1     "); Serial.println(prvsTime);
-
-  // }
+  
 
   if(currentTime < rotationDuration)
   {
-     Serial.print("ctime2     "); Serial.println(currentTime);
-      // Serial.print("ptime2     "); Serial.println(prvsTime);
-    // Serial.print("ctime - ptime    "); Serial.println(currentTime);
+     Serial.print("ctime2     "); Serial.println(currentTime);  
     Serial.println("rotating with ");
     robotMovement(1,0,0,1);
     bleDataS();
    
+   
   }
   else
   {
+    compassDirection();
+    if(compareDirections() == true)
+    {
     rotate = true;
     Serial.println("rotation stopped");
+    }
   }
   
 }
@@ -97,8 +88,10 @@ void rotatingOne()
 
  void obstacleAvoidance()
  { 
+  if(rotate == false)
+{  
    rotatingOne(); 
- 
+}
 if(rotate == true)
 {
   int distance_R;
