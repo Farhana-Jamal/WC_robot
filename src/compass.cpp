@@ -77,7 +77,7 @@ bool compareDirections()
     }
     else
     {
-       robotMovement(1,0,0,1);
+       robotMovement(250,0,0,250);
        Serial.println("directions are not same ... still rotating");
 
        return false;

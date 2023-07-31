@@ -9,5 +9,6 @@ void compassSetup();
 void rotate_CompassDirection();
 void compassDirection();
 bool compareDirections();
+void collectWaste();
 
 #endif

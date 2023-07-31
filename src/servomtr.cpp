@@ -1,31 +1,29 @@
 #include "servomtr.h"
 
 
-void servoRotate(int pulseWidth)
-{
-    digitalWrite(servoPin , HIGH);
-    delayMicroseconds(pulseWidth);         
-    digitalWrite(servoPin, LOW);
-    delay(20);                      //20ms (50 Hz) PWM period (pulsecycle)
-}
+Servo servo;
 
 void servoSetup()
 {
     Serial.begin(115200);
-    pinMode(servoPin , OUTPUT);
-    
-    servoRotate(1500);
+    servo.setPeriodHertz(50);
+    servo.attach(servoPin,500,2400);
+
+    if(servo.attached())
+    {
+      Serial.println("servo attached");
+    }
+    servo.write(115);
+
 }
-
-
 
 int lookRight()
 {
-    servoRotate(500);               //500 - 0deg
+    servo.write(50);
     delay(500);
     int distance = lidarDistance();
     delay(100);
-    servoRotate(1500);              //1500 - 90deg
+    servo.write(115);
 
     return distance;
 
@@ -33,11 +31,11 @@ int lookRight()
 
 int lookLeft()
 {
-    servoRotate(2200);             //2200 - 180deg
+    servo.write(170);
     delay(500);
     int distance = lidarDistance();
     delay(100);
-    servoRotate(1500);
+    servo.write(115);
 
     return distance;
 }

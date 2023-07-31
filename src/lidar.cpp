@@ -68,7 +68,7 @@ void rotatingOne()
   {
      Serial.print("ctime2     "); Serial.println(currentTime);  
     Serial.println("rotating with ");
-    robotMovement(1,0,0,1);
+    robotMovement(250,0,0,250);                 //left
     bleDataS();
    
    
@@ -101,14 +101,14 @@ if(rotate == true)
 
   if(distance >400)
   {
-    robotMovement(0,1,0,1);   //forward
+    robotMovement(0,145,0,250);   //forward
   }
   else
   {
     robotMovement(0,0,0,0);   //stop
     delay(300);
 
-    robotMovement(1,0,1,0);   //backward
+    robotMovement(145,0,250,0);   //backward
     delay(400);
 
     robotMovement(0,0,0,0);
@@ -122,16 +122,16 @@ if(rotate == true)
 
     if(distance >= distance_L)
     {
-      robotMovement(0,1,1,0);      //right
+      robotMovement(0,250,250,0);      //right
       delay(500);
-      robotMovement(0,1,0,1);      //forward
+      robotMovement(0,145,0,250);      //forward
       robotMovement(0,0,0,0);      //stop
     }
     else
     {
-      robotMovement(1,0,0,1);   //left
+      robotMovement(250,0,0,250);   //left
       delay(500);
-      robotMovement(0,1,0,1);      //forward
+      robotMovement(0,145,0,250);      //forward
       robotMovement(0,0,0,0);      //stop
 
     }
@@ -140,6 +140,9 @@ if(rotate == true)
   bleDataS();
 
   distance = lidarDistance();
-   
+
+  collectWaste();
  }
  }
+
+ 
