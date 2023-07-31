@@ -1,6 +1,6 @@
 #include "vehicle.h"
 
-
+#include <Arduino.h>
 
 
 void motorSetup()

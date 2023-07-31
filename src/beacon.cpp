@@ -39,14 +39,26 @@ void rssiRead(int rssiRaw)
    
 }
 
-void collectWaste()
+bool collectWaste()
 {
-  if(rssiData < -20 && rssiData >-10)
+  if(rssiData < -30 && rssiData >-10)
   {
      robotMovement(0,0,0,0);
      delay(5000);
+  
   }
+     return true;
 }
+ void depositWaste()
+ {
+  if(rssiData < -30 && rssiData >-10)
+  {
+     robotMovement(0,0,0,0);
+     bottomOpenAndClose();
+     
+  }
+ }
+
 
 void btAdvertisedDeviceFound(BTAdvertisedDevice* pDevice) {
 	Serial.printf("Found a device asynchronously: %s\n", pDevice->toString().c_str());

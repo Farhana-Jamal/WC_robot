@@ -2,6 +2,8 @@
 
 QueueHandle_t queue = NULL;
 DFRobot_QMC5883 compass(&Wire, QMC5883_ADDRESS);
+
+
 void compassSetup()
 {
     Serial.begin(115200);
@@ -10,7 +12,7 @@ void compassSetup()
       Serial.println("Could not find a valid 5883 sensor, check wiring!");
       delay(500);
     }
-   queue = xQueueCreate(15,sizeof(float));
+   queue = xQueueCreate(10,sizeof(float));
    if (queue != NULL)
    {
     Serial.println("queue is created");
@@ -30,7 +32,7 @@ void rotate_CompassDirection()
 //   Serial.print(mag.YAxis);
 //   Serial.print(" Z:");
 //   Serial.println(mag.ZAxis);
-  Serial.print("Degress = ");
+  Serial.print("Degrees = ");
   float headingDegree = mag.HeadingDegress;
   Serial.println(headingDegree);
 

@@ -4,10 +4,13 @@
 #include "lidar.h"
 #include <ESP32Servo.h>
 
-#define servoPin  17
+#define obstacleServoPin  17
+#define bottomBioServoPin 18
+#define bottomNonBioServoPin 19
 
 void servoSetup();
 int lookRight();
 int lookLeft();
+void bottomOpenAndClose();
 
 #endif

@@ -4,7 +4,10 @@
 #include "servomtr.h"
 #include "beacon.h"
 #include "compass.h"
+#include "master.h"
 
+
+bool wasteCollecting = false;
 void setup() 
 {
   servoSetup();
@@ -12,6 +15,7 @@ void setup()
   motorSetup();
   bleBeaconSetup();
   compassSetup();
+  robotStartSetup();
 
 
 }
@@ -20,9 +24,19 @@ void setup()
 
 void loop()
 { 
- 
-  
-  obstacleAvoidance();
-  // moveFwd();
- 
+  if(wasteCollecting == false)
+  {
+     if(moveToCollectingWaste()==true)
+     {
+      wasteCollecting = true;
+     }
+  }
+  if(wasteCollecting == true)
+  {
+    if(moveToDepositingWaste() == true)
+    {
+      wasteCollecting = true;
+    }
+    
+  }
 }

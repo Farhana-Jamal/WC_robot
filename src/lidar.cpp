@@ -1,9 +1,8 @@
 #include "lidar.h"
 
-unsigned long rotationDuration = 30000;
-unsigned long currentTime;
 
-bool rotate = false;
+
+
  
 int distance ;
 
@@ -58,42 +57,11 @@ void lidarSetup()
   distance = lidarDistance();
 }
 
-void rotatingOne()
-{
-  currentTime = millis();
-  Serial.print("ctime1     "); Serial.println(currentTime);
-  
-
-  if(currentTime < rotationDuration)
-  {
-     Serial.print("ctime2     "); Serial.println(currentTime);  
-    Serial.println("rotating with ");
-    robotMovement(250,0,0,250);                 //left
-    bleDataS();
-   
-   
-  }
-  else
-  {
-    compassDirection();
-    if(compareDirections() == true)
-    {
-    rotate = true;
-    Serial.println("rotation stopped");
-    }
-  }
-  
-}
 
 
  void obstacleAvoidance()
  { 
-  if(rotate == false)
-{  
-   rotatingOne(); 
-}
-if(rotate == true)
-{
+  
   int distance_R;
   int distance_L;
 
@@ -137,12 +105,14 @@ if(rotate == true)
     }
   }
 
-  bleDataS();
-
+  
   distance = lidarDistance();
 
-  collectWaste();
+  
  }
- }
+ 
+
+
+
 
  

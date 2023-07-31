@@ -1,29 +1,38 @@
 #include "servomtr.h"
 
 
-Servo servo;
+Servo obstacleServo;
+Servo bottomBioServo;
+Servo bottomNonBioServo;
 
 void servoSetup()
 {
     Serial.begin(115200);
-    servo.setPeriodHertz(50);
-    servo.attach(servoPin,500,2400);
+    obstacleServo.setPeriodHertz(50);
+    bottomBioServo.setPeriodHertz(50);
+    bottomNonBioServo.setPeriodHertz(50);
 
-    if(servo.attached())
+    obstacleServo.attach(obstacleServoPin,500,2400);
+    bottomBioServo.attach(bottomBioServoPin , 500,2400);
+    bottomNonBioServo.attach(bottomNonBioServoPin , 500,2400);
+
+    if(obstacleServo.attached())
     {
       Serial.println("servo attached");
     }
-    servo.write(115);
+    obstacleServo.write(115);
+    bottomBioServo.write(0);
+    bottomNonBioServo.write(0);
 
 }
 
 int lookRight()
 {
-    servo.write(50);
+    obstacleServo.write(50);
     delay(500);
     int distance = lidarDistance();
     delay(100);
-    servo.write(115);
+    obstacleServo.write(115);
 
     return distance;
 
@@ -31,13 +40,24 @@ int lookRight()
 
 int lookLeft()
 {
-    servo.write(170);
+    obstacleServo.write(170);
     delay(500);
     int distance = lidarDistance();
     delay(100);
-    servo.write(115);
+    obstacleServo.write(115);
 
     return distance;
+}
+
+void bottomOpenAndClose()
+{
+    bottomBioServo.write(90);
+    delay(2000);
+    bottomBioServo.write(0);
+    bottomNonBioServo.write(90);
+    delay(2000);
+    bottomNonBioServo.write(0);
+
 }
 
 
