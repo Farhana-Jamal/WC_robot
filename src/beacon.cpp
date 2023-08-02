@@ -26,6 +26,7 @@ void rssiRead(int rssiRaw)
     Serial.println(rssiRaw);
     Serial.println(rssiData);
     
+    // collectWaste();
     if(rssiRaw >= rssiData)
     {
         Serial.print("greater rssiraw");  Serial.println(rssiRaw);
@@ -41,17 +42,23 @@ void rssiRead(int rssiRaw)
 
 bool collectWaste()
 {
-  if(rssiData < -30 && rssiData >-10)
+  if(rssiData < -30 && rssiData <-10)
   {
      robotMovement(0,0,0,0);
      delay(5000);
-  
+    Serial.println("yes collected");
+    return true;
   }
-     return true;
+    else
+    {
+      Serial.println("not reached");
+      return false;
+    }
+    
 }
  void depositWaste()
  {
-  if(rssiData < -30 && rssiData >-10)
+  if(rssiData < -30 && rssiData <-10)
   {
      robotMovement(0,0,0,0);
      bottomOpenAndClose();

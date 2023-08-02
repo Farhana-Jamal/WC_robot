@@ -71,6 +71,7 @@ bool compareDirections()
 
     if(headingDegree == headingDegreeFinal)
     {
+
         robotMovement(0,0,0,0);
         Serial.println("directions are same ..rotation stopped");
         delay(1000);
@@ -79,7 +80,7 @@ bool compareDirections()
     }
     else
     {
-       robotMovement(250,0,0,250);
+       robotMovement(0,250,250,0);
        Serial.println("directions are not same ... still rotating");
 
        return false;

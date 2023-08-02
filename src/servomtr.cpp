@@ -29,6 +29,7 @@ void servoSetup()
 int lookRight()
 {
     obstacleServo.write(50);
+    Serial.println("servo rotate to left");
     delay(500);
     int distance = lidarDistance();
     delay(100);

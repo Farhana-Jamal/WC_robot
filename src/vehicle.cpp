@@ -28,7 +28,7 @@ void motorSetup()
 
 
 
-void robotMovement(bool INA1,bool INA2 , bool INA3 , bool INA4)
+void robotMovement(int INA1,int INA2 , int INA3 , int INA4)
 {
   analogWrite (motor1Pin1 , INA1);
   analogWrite (motor1Pin2 , INA2);

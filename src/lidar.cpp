@@ -69,14 +69,16 @@ void lidarSetup()
 
   if(distance >400)
   {
-    robotMovement(0,145,0,250);   //forward
+    robotMovement(145,0,250,0)
+    ;   //forward
+    Serial.println("forward");
   }
   else
   {
     robotMovement(0,0,0,0);   //stop
     delay(300);
 
-    robotMovement(145,0,250,0);   //backward
+    robotMovement(0,145,0,250);   //backward
     delay(400);
 
     robotMovement(0,0,0,0);
@@ -88,18 +90,18 @@ void lidarSetup()
     distance_L = lookLeft();
     delay (300);
 
-    if(distance >= distance_L)
+    if(distance_R >= distance_L)
     {
       robotMovement(0,250,250,0);      //right
       delay(500);
-      robotMovement(0,145,0,250);      //forward
+      robotMovement(145,0,250,0);      //forward
       robotMovement(0,0,0,0);      //stop
     }
     else
     {
       robotMovement(250,0,0,250);   //left
       delay(500);
-      robotMovement(0,145,0,250);      //forward
+      robotMovement(145,0,250,0);      //forward
       robotMovement(0,0,0,0);      //stop
 
     }

@@ -15,7 +15,7 @@ void setup()
   motorSetup();
   bleBeaconSetup();
   compassSetup();
-  robotStartSetup();
+  // robotStartSetup();
 
 
 }
