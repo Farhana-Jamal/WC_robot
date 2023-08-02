@@ -162,7 +162,11 @@ bool moveToCollectingWaste()
 }
 
 bool moveToDepositingWaste()
-{
+{ 
+  if(moveToCollectingWaste() ==  true)
+  {
+
+  
     if(rotate == false)
     {
         rotatingOne();
@@ -173,6 +177,7 @@ bool moveToDepositingWaste()
         bleDataS();
         depositWaste();
     }
+  }
     return true;
 
 }

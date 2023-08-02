@@ -42,12 +42,12 @@ void rssiRead(int rssiRaw)
 
 bool collectWaste()
 {
-  if(rssiData < -30 && rssiData <-10)
+  if(rssiData > -30 && rssiData <-10)
   {
      robotMovement(0,0,0,0);
      delay(5000);
-    Serial.println("yes collected");
-    return true;
+     Serial.println("yes collected");
+     return true;
   }
     else
     {
@@ -95,9 +95,9 @@ void btAdvertisedDeviceFound(BTAdvertisedDevice* pDevice) {
     Serial.print("Starting discoverAsync...");
     if (SerialBT.discoverAsync(btAdvertisedDeviceFound)) {
       delay(2000);
-      Serial.print("Stopping discoverAsync... ");
-      SerialBT.discoverAsyncStop();
-      Serial.println("stopped");
+      // Serial.print("Stopping discoverAsync... ");
+      // SerialBT.discoverAsyncStop();
+      // Serial.println("stopped");
     } else {
       Serial.println("Error on discoverAsync f.e. not workin after a \"connect\"");
     }
