@@ -1,3 +1,142 @@
+// #include "beacon.h"
+
+// #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
+// #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
+// #endif
+
+// #if !defined(CONFIG_BT_SPP_ENABLED)
+// #error Serial Bluetooth not available or not enabled. It is only available for the ESP32 chip.
+// #endif
+
+// BluetoothSerial SerialBT;
+// QueueHandle_t RSSIqueue = NULL;
+
+// #define BT_DISCOVER_TIME 2000
+
+// static bool btScanAsync = true;
+// static bool btScanSync = true;
+
+ 
+// int rssiData = -100;
+
+// void rssiRead()
+// {
+//     int rssiRaw;
+//     xQueueReceive(RSSIqueue, &rssiRaw, TickType_t(10 / portTICK_PERIOD_MS));
+//     Serial.println(rssiRaw);
+//     Serial.println(rssiData);
+
+//     if (rssiRaw >= rssiData)
+//     {
+//         Serial.print("Greater rssiRaw: ");
+//         Serial.println(rssiRaw);
+//         rssiData = rssiRaw;
+//         rotate_CompassDirection();
+//         xQueueSend(RSSIqueue, &rssiData, TickType_t(10 / portTICK_PERIOD_MS));
+//     }
+//     else
+//     {
+//         Serial.print("Greater rssiData: ");
+//         Serial.println(rssiData);
+//     }
+// }
+
+
+// bool compareRSSIDatas()
+// {
+//     int rssiRaw , rssiData;
+//     xQueueReceive(RSSIqueue, &rssiData, TickType_t(10 / portTICK_PERIOD_MS));
+//     xQueueReceive(RSSIqueue, &rssiRaw, TickType_t(10 / portTICK_PERIOD_MS));
+//     if(rssiData == rssiRaw)
+//     {
+//         return true;
+//     }
+//     else 
+//     {
+//         return false;
+//     }
+    
+
+
+// }
+// bool collectWaste()
+// {
+//     if (rssiData > -30 && rssiData < -10)
+//     {
+//         robotMovement(0, 0, 0, 0);
+//         delay(10000); // Wait for 10 seconds to collect waste
+//         Serial.println("Waste collected");
+//         return true;
+//     }
+//     else
+//     {
+//         Serial.println("Not reached to collect waste");
+//         return false;
+//     }
+// }
+
+// void depositWaste()
+// {
+//     if (rssiData < -30 && rssiData < -10)
+//     {
+//         robotMovement(0, 0, 0, 0);
+//         bottomOpenAndClose();
+//     }
+// }
+
+// void btAdvertisedDeviceFound(BTAdvertisedDevice *pDevice)
+// {
+//     Serial.printf("Found a device asynchronously: %s\n", pDevice->toString().c_str());
+
+//     String deviceName = pDevice->getName().c_str();
+//     const char *deviceAddress = pDevice->getAddress().toString().c_str();
+//     int cod = pDevice->getCOD();
+//     int rssiRaw = pDevice->getRSSI();
+
+//     Serial.print("Device Name: ");
+//     Serial.println(deviceName);
+//     Serial.print("Device Address: ");
+//     Serial.println(deviceAddress);
+//     Serial.print("COD: ");
+//     Serial.println(cod);
+//     Serial.print("RSSI: ");
+//     Serial.println(rssiRaw);
+//     Serial.println();
+
+//     xQueueSend(RSSIqueue, &rssiRaw, TickType_t(10 / portTICK_PERIOD_MS));
+//     delay(100);
+//     rssiRead();
+// }
+
+// void bleDataS()
+// {
+//     if (btScanAsync)
+//     {
+//         Serial.print("Starting discoverAsync...");
+//         if (SerialBT.discoverAsync(btAdvertisedDeviceFound))
+//         {
+//             delay(2000);
+//         }
+//         else
+//         {
+//             Serial.println("Error on discoverAsync, not working after a \"connect\"");
+//         }
+//     }
+// }
+
+// void bleBeaconSetup()
+// {
+//     Serial.begin(115200);
+//     SerialBT.begin("ESP32test"); // Bluetooth device name
+//     Serial.println("The device started, now you can pair it with Bluetooth!");
+
+//     RSSIqueue = xQueueCreate(8, sizeof(int));
+//     if (RSSIqueue != NULL)
+//     {
+//         Serial.println("RSSI Queue is created");
+//     }
+// }
+
 #include "beacon.h"
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
@@ -116,7 +255,6 @@ void bleBeaconSetup()
   Serial.println("The device started, now you can pair it with bluetooth!");
 
 }
-
 
 
  
